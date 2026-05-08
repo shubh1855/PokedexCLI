@@ -7,35 +7,11 @@ import (
 	"strings"
 )
 
-type cliCommand struct {
-	name        string
-	description string
-	callback    func() error
-}
-
-var commands map[string]cliCommand
-
-func init() {
-	commands = map[string]cliCommand{
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    commandExit,
-		},
-		"help": {
-			name:        "help",
-			description: "Displays a help message",
-			callback:    commandHelp,
-		},
-	}
-}
-
 func startRepl() {
 	reader := bufio.NewScanner(os.Stdin)
 
 	for {
 		fmt.Print("Pokedex > ")
-
 		reader.Scan()
 
 		if err := reader.Err(); err != nil {
@@ -44,7 +20,6 @@ func startRepl() {
 		}
 
 		words := cleanInput(reader.Text())
-
 		if len(words) == 0 {
 			continue
 		}
@@ -52,9 +27,9 @@ func startRepl() {
 		commandName := words[0]
 
 		command, exists := commands[commandName]
-
 		if exists {
-			if err := command.callback(); err != nil {
+			err := command.callback()
+			if err != nil {
 				fmt.Println(err)
 			}
 		} else {
@@ -64,24 +39,30 @@ func startRepl() {
 }
 
 func cleanInput(text string) []string {
-	return strings.Fields(strings.ToLower(text))
+	output := strings.ToLower(text)
+	words := strings.Fields(output)
+	return words
 }
 
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-
-	return nil
+type cliCommand struct {
+	name        string
+	description string
+	callback    func() error
 }
 
-func commandHelp() error {
-	fmt.Println("Welcome to the Pokedex!")
-	fmt.Println("Usage:")
-	fmt.Println()
+var commands = getCommands()
 
-	for _, command := range commands {
-		fmt.Printf("%s: %s\n", command.name, command.description)
+func getCommands() map[string]cliCommand {
+	return map[string]cliCommand{
+		"help": {
+			name:        "help",
+			description: "Displays a help message",
+			callback:    commandHelp,
+		},
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
+		},
 	}
-
-	return nil
 }
