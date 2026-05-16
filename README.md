@@ -1,3 +1,6 @@
+![CI](https://github.com/shubh1855/pokedexcli/actions/workflows/ci.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/shubh1855/pokedexcli)
+
 # Pokedex CLI
 
 A command-line Pokédex application written in Go that lets you explore the Pokémon world, discover location areas, encounter Pokémon, catch them, inspect their stats, and maintain your own personal Pokédex.
@@ -9,11 +12,12 @@ This project was built as a learning project to practice Go fundamentals, CLI de
 ## Features
 
 ### Interactive CLI (REPL)
+
 Runs as an interactive shell where commands can be executed continuously until exit.
 
 ```bash
 Pokedex >
-````
+```
 
 ### Location Navigation
 
@@ -189,16 +193,16 @@ The application includes a concurrency-safe in-memory caching layer for PokeAPI 
 
 Benefits:
 
-* Faster repeated requests
-* Reduced API calls
-* Instant revisits for explored locations
-* Better CLI responsiveness
+- Faster repeated requests
+- Reduced API calls
+- Instant revisits for explored locations
+- Better CLI responsiveness
 
 Implementation includes:
 
-* sync.Mutex
-* time.Ticker
-* automatic cache expiration
+- sync.Mutex
+- time.Ticker
+- automatic cache expiration
 
 ---
 
@@ -238,10 +242,10 @@ Implementation includes:
 
 Handles:
 
-* user input
-* command parsing
-* command dispatching
-* runtime application state
+- user input
+- command parsing
+- command dispatching
+- runtime application state
 
 Files:
 
@@ -270,10 +274,10 @@ command_inspect.go
 
 Responsible for:
 
-* HTTP communication
-* JSON parsing
-* endpoint-specific logic
-* cache integration
+- HTTP communication
+- JSON parsing
+- endpoint-specific logic
+- cache integration
 
 Files:
 
@@ -297,13 +301,13 @@ internal/pokecache/
 
 ## Technologies Used
 
-* Go
-* PokeAPI
-* net/http
-* encoding/json
-* sync
-* time
-* math/rand
+- Go
+- PokeAPI
+- net/http
+- encoding/json
+- sync
+- time
+- math/rand
 
 ---
 
