@@ -15,7 +15,8 @@ type config struct {
 	nextLocationsURL *string
 	prevLocationsURL *string
 	pokedex          map[string]pokeapi.Pokemon
-	randSource       *rand.Rand
+
+	randSource *rand.Rand
 }
 
 func startRepl(cfg *config) {
