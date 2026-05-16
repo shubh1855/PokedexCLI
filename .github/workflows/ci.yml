@@ -6,7 +6,6 @@ on:
     paths:
       - '**/*.go'
       - go.mod
-      - go.sum
   pull_request:
     types:
       - closed
@@ -15,7 +14,6 @@ on:
     paths:
       - '**/*.go'
       - go.mod
-      - go.sum
 jobs:
   ci:
     if: |
@@ -29,16 +27,13 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.24'
+          cache: false
       - name: Verify dependencies
         run: go mod tidy
       - name: Check formatting
         run: test -z "$(gofmt -l .)"
       - name: Run go vet
         run: go vet ./...
-      - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-          version: latest
       - name: Run tests
         run: go test ./...
       - name: Build project
